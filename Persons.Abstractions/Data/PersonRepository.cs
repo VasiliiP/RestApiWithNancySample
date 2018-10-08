@@ -16,17 +16,30 @@ namespace Persons.Abstractions.Data
         {
             if (!File.Exists(DbFile)) return null;
 
+            var guidString = id.ToString("n");
+            var byteString = ToHexString(id.ToByteArray());
+            var byteArr = id.ToByteArray();
+
+
             using (var cnn = SimpleDbConnection())
             {
                 cnn.Open();
                 Person result = cnn.Query<Person>(
-                    @"SELECT Id, Name, DateOfBirth
+                    @"SELECT ID, Name, BirthDay
                     FROM Person
-                    WHERE Id = @id", new { id }).FirstOrDefault();
+                    WHERE ID = @byteArr", new { byteArr }).FirstOrDefault();
                 return result;
             }
         }
-
+        private String ToHexString(Byte[] bytes)
+        {
+            var hex = new StringBuilder(bytes.Length * 2);
+            foreach (var b in bytes)
+            {
+                hex.AppendFormat("{0:x2}", b);
+            }
+            return hex.ToString().ToUpper();
+        }
         public void Insert(Person item)
         {
             if (!File.Exists(DbFile))

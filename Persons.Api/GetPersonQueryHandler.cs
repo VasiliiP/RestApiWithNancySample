@@ -8,16 +8,16 @@ using Persons.Abstractions.Entities;
 
 namespace Persons.Api
 {
-    public class FindPersonQueryHandler : IQueryHandler<FindPersonQuery, Person>
+    public class GetPersonQueryHandler : IQueryHandler<GetPersonQuery, Person>
     {
         private readonly IPersonRepository _PersonRepository;
 
-        public FindPersonQueryHandler(IPersonRepository personRepository)
+        public GetPersonQueryHandler(IPersonRepository personRepository)
         {
             _PersonRepository = personRepository;
         }
 
-        public Person Execute(FindPersonQuery query)
+        public Person Execute(GetPersonQuery query)
         {
             var person = _PersonRepository.Find(query.Id);
             return person;

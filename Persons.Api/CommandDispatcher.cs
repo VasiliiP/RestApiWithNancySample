@@ -10,7 +10,6 @@ using Persons.Api;
 
 public class CommandDispatcher : ICommandDispatcher
 {
-    //private readonly TinyIoCContainer _Resolver;
     private readonly IComponentContext _Context;
     public CommandDispatcher(IComponentContext context)
     {

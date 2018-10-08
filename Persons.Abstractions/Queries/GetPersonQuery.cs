@@ -4,13 +4,12 @@ using Persons.Abstractions.Entities;
 
 namespace Persons.Api
 {
-    public class FindPersonQuery: IQuery<Person>
+    public class GetPersonQuery: IQuery<Person>
     {
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
-        public FindPersonQuery(Guid id)
+        public GetPersonQuery()
         {
-            Id = id;
         }
     }
 }

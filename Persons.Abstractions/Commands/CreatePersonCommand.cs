@@ -8,16 +8,10 @@ namespace Persons.Abstractions.Commands
         public DateTime BirthDay { get; set; }
         public Guid Id { get; set; }
 
-        //public CreatePersonCommand(string name, DateTime birthDay)
-        //{
-        //    Name = name;
-        //    BirthDay = birthDay;
-        //    Id = new Guid();
-        //}
 
         public CreatePersonCommand()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
         }
     }
 }

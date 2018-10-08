@@ -51,8 +51,8 @@
   <ItemGroup>
     <Compile Include="CommandDispatcher.cs" />
     <Compile Include="CreatePersonCommandHandler.cs" />
-    <Compile Include="FindPersonQuery.cs" />
-    <Compile Include="FindPersonQueryHandler.cs" />
+    <Compile Include="GetPersonQueryHandler.cs" />
+    <Compile Include="NancyModules\GetPersonModule .cs" />
     <Compile Include="NancyModules\CreatePersonModule.cs" />
     <Compile Include="NancyModules\NancyTestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

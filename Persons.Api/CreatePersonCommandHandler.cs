@@ -19,6 +19,7 @@ namespace Persons.Api
             var person = Person.CreatePerson(command.Name, command.BirthDay, command.Id);
             if (person == null)
                 throw new ArgumentException(nameof(person));
+
             _PersonRepository.Insert(person);
         }
     }
