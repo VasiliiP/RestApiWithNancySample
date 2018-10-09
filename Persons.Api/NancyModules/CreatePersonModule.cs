@@ -1,15 +1,13 @@
-﻿
-using System;
-using Nancy;
-using Nancy.Extensions;
+﻿using Nancy;
 using Nancy.ModelBinding;
 using Persons.Abstractions;
 using Persons.Abstractions.Commands;
+using System;
 
 namespace Persons.Api.NancyModules
 {
     public class CreatePersonModule : NancyModule
-    {
+    {      
         public CreatePersonModule(ICommandDispatcher commandDispatcher) : base("/api/v1/")
         {
             Post["/persons"] = parameters =>
@@ -17,7 +15,7 @@ namespace Persons.Api.NancyModules
                 CreatePersonCommand command = null;
                 try
                 {
-                    command = this.Bind<CreatePersonCommand>(c => c.Id);
+                    command = this.Bind<CreatePersonCommand>();
                 }
                 catch (ModelBindingException e)
                 {

@@ -8,7 +8,7 @@ using Persons.Abstractions.Entities;
 
 namespace Persons.Api
 {
-    public class GetPersonQueryHandler : IQueryHandler<GetPersonQuery, Person>
+    public class GetPersonQueryHandler : IQueryHandler<GetPersonQuery, PersonDto>
     {
         private readonly IPersonRepository _PersonRepository;
 
@@ -17,10 +17,10 @@ namespace Persons.Api
             _PersonRepository = personRepository;
         }
 
-        public Person Execute(GetPersonQuery query)
+        public PersonDto Execute(GetPersonQuery query)
         {
             var person = _PersonRepository.Find(query.Id);
-            return person;
+            return new PersonDto(person);
         }
     }
 }

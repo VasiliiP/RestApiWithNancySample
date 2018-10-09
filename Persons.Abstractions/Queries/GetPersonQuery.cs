@@ -4,7 +4,7 @@ using Persons.Abstractions.Entities;
 
 namespace Persons.Api
 {
-    public class GetPersonQuery: IQuery<Person>
+    public class GetPersonQuery: IQuery<PersonDto>
     {
         public Guid Id { get; set; }
 

@@ -22,10 +22,10 @@ namespace Persons.Api.NancyModules
                     return Response.AsText(e.Message).WithStatusCode(HttpStatusCode.BadRequest);
                 }
 
-                Person person = null;
+                PersonDto person = null;
                 try
                 {
-                    person = queryDispatcher.Execute<GetPersonQuery, Person>(query);
+                    person = queryDispatcher.Execute<GetPersonQuery, PersonDto>(query);
                 }
                 catch (Exception e)
                 {

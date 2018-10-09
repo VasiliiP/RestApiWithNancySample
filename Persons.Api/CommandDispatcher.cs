@@ -1,32 +1,36 @@
 ﻿using System;
 using Autofac;
 using Autofac.Core;
-using Nancy;
-
-using Nancy.TinyIoc;
 using Persons.Abstractions;
-using Persons.Abstractions.Commands;
-using Persons.Api;
+using Persons.Api.Logging;
 
-public class CommandDispatcher : ICommandDispatcher
+namespace Persons.Api
 {
-    private readonly IComponentContext _Context;
-    public CommandDispatcher(IComponentContext context)
+    public class CommandDispatcher : ICommandDispatcher
     {
-        _Context = context;
-    }
+        private readonly ILog log = LogProvider.GetCurrentClassLogger();
+
+        private readonly IComponentContext _Context;
+        public CommandDispatcher(IComponentContext context)
+        {
+            _Context = context;
+        }
 
 
-    public void Execute<TCommand>(TCommand command) where TCommand : ICommand
-    {
-        if (command == null)
-            throw new ArgumentNullException("Command");
+        public void Execute<TCommand>(TCommand command) where TCommand : ICommand
+        {
+            if (command == null)
+                throw new ArgumentNullException("Command");
 
-        var handler = _Context.Resolve<ICommandHandler<TCommand>>();
+            var handler = _Context.Resolve<ICommandHandler<TCommand>>();
                   
-        if (handler == null)
-            throw new DependencyResolutionException(nameof(ICommandHandler<TCommand>));
+            if (handler == null)
+                throw new DependencyResolutionException(nameof(ICommandHandler<TCommand>));
 
-        handler.Execute(command);
+            log.Log(LogLevel.Error, () => "sdfsf");
+            log.Error("cccccc");
+
+            handler.Execute(command);
+        }
     }
 }

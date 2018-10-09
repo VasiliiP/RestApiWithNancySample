@@ -35,7 +35,7 @@ namespace Persons.Service
             container.Update(builder => builder.RegisterType<CreatePersonCommandHandler>().As<ICommandHandler<CreatePersonCommand>>());
             container.Update(builder => builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>());
             container.Update(builder => builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>());
-            container.Update(builder => builder.RegisterType<GetPersonQueryHandler>().As<IQueryHandler<GetPersonQuery, Person>>());
+            container.Update(builder => builder.RegisterType<GetPersonQueryHandler>().As<IQueryHandler<GetPersonQuery, PersonDto>>());
             container.Update(builder => builder.RegisterType<PersonRepository>().As<IPersonRepository>());
         }
 

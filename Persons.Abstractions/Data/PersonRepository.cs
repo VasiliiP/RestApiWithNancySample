@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Dapper;
+using Persons.Abstractions.Entities;
+using System;
+using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
-using Persons.Abstractions.Entities;
 
 namespace Persons.Abstractions.Data
 {
@@ -16,14 +14,13 @@ namespace Persons.Abstractions.Data
         {
             if (!File.Exists(DbFile)) return null;
 
-            var guidString = id.ToString("n");
-            var byteString = ToHexString(id.ToByteArray());
             var byteArr = id.ToByteArray();
-
+            SqlMapper.AddTypeHandler(new GuidHandler());
 
             using (var cnn = SimpleDbConnection())
             {
                 cnn.Open();
+
                 Person result = cnn.Query<Person>(
                     @"SELECT ID, Name, BirthDay
                     FROM Person
@@ -31,17 +28,11 @@ namespace Persons.Abstractions.Data
                 return result;
             }
         }
-        private String ToHexString(Byte[] bytes)
-        {
-            var hex = new StringBuilder(bytes.Length * 2);
-            foreach (var b in bytes)
-            {
-                hex.AppendFormat("{0:x2}", b);
-            }
-            return hex.ToString().ToUpper();
-        }
+
         public void Insert(Person item)
         {
+            SqlMapper.AddTypeHandler(new GuidHandler());
+
             if (!File.Exists(DbFile))
             {
                 CreateDatabase();
@@ -66,11 +57,28 @@ namespace Persons.Abstractions.Data
                 cnn.Execute(
                     @"create table Person
                       (
-                         ID                                  BLOB primary key,
+                         ID                                  UNIQUEIDENTIFIER,
                          Name                           varchar(100) not null,
                          BirthDay                           datetime not null
                       )");
             }
         }
     }
+
+    /// <summary>
+    /// Для маппинга byte поля в таблице Sqlite cо свойством типа Guid
+    /// </summary>
+    public class GuidHandler : SqlMapper.TypeHandler<Guid>
+    {
+        public override Guid Parse(object value)
+        {
+            return new Guid((byte[])value);
+        }
+
+        public override void SetValue(IDbDataParameter parameter, Guid value)
+        {
+            parameter.Value = value.ToByteArray();
+        }
+    }
+
 }

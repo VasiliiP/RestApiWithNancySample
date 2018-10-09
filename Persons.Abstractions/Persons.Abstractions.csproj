@@ -65,6 +65,7 @@
     <Compile Include="Data\PersonRepository.cs" />
     <Compile Include="Data\SqLiteBaseRepository.cs" />
     <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\PersonDto.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandDispatcher.cs" />
     <Compile Include="ICommandHandler.cs" />
