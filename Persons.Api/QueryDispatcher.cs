@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
-using Nancy.Bootstrapper;
+﻿using Autofac;
 using Nancy.TinyIoc;
 using Persons.Abstractions;
+using System;
 
 namespace Persons.Api
 {

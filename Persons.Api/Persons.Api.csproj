@@ -58,7 +58,6 @@
     <Compile Include="GetPersonQueryHandler.cs" />
     <Compile Include="NancyModules\GetPersonModule .cs" />
     <Compile Include="NancyModules\CreatePersonModule.cs" />
-    <Compile Include="NancyModules\NancyTestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDispatcher.cs" />
   </ItemGroup>

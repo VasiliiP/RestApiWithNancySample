@@ -27,8 +27,8 @@ namespace Persons.Api
             if (handler == null)
                 throw new DependencyResolutionException(nameof(ICommandHandler<TCommand>));
 
-            log.Log(LogLevel.Error, () => "sdfsf");
-            log.Error("cccccc");
+            
+            log.Info(nameof(TCommand));
 
             handler.Execute(command);
         }

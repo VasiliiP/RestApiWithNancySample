@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Persons.Abstractions.Entities;
+﻿using Persons.Abstractions.Entities;
+using System;
 
 namespace Persons.Abstractions
 {
