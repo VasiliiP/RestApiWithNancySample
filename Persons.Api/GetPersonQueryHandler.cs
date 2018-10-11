@@ -20,7 +20,7 @@ namespace Persons.Api
         public PersonDto Execute(GetPersonQuery query)
         {
             var person = _PersonRepository.Find(query.Id);
-            return new PersonDto(person);
+            return person == null ? null : new PersonDto(person);
         }
     }
 }
